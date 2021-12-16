@@ -4,6 +4,15 @@ services:
   app:
     image: job-schedule-app
     container_name: job-schedule-app
+    environment:
+      - JSCH_ENV=${JSCH_ENV}
+      - HTTP_PORT=${HTTP_PORT}
+      - JWT_SIGNING_KEY=${JWT_SIGNING_KEY}
+      - AUTH_PASSWORD_SALT=${AUTH_PASSWORD_SALT}
+      - AUTH_VERIFICATION_CODE_LENGTH=${AUTH_VERIFICATION_CODE_LENGTH}
+      - JSCH_MONGO_URI=${JSCH_MONGO_URI}
+      - JSCH_MONGO_USER=${JSCH_MONGO_USER}
+      - JSCH_MONGO_PASSWORD=${JSCH_MONGO_PASSWORD}
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,7 +21,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./.bin/:/var/lib/app/
+      - ./.bin:/var/lib/app
 
   mongodb:
     image: mongo:4.4.5-bionic
