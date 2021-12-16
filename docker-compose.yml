@@ -15,7 +15,7 @@ services:
       - ./.bin/:/var/lib/app/
 
   mongodb:
-    image: mongo:5.0-bionic
+    image: mongo:4.4.5-bionic
     container_name: mongodb
     environment:
       - MONGO_DATA_DIR=/var/data/mongo
