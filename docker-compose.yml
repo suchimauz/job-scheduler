@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  app:
+    image: job-schedule-app
+    container_name: job-schedule-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${HTTP_PORT}:8085"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./.bin/:/var/lib/app/
+
+  mongodb:
+    image: mongo:5.0-bionic
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/var/data/mongo
+      - MONGO_LOG_DIR=/dev/null
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./.data/mongo:/var/data/mongo
+    ports:
+      - 27018:27017
