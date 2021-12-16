@@ -26,7 +26,7 @@ type (
 		URI      string `required:"true"`
 		User     string `required:"true"`
 		Password string `required:"true"`
-		Database string `required:"true" default:"JobScheduler"`
+		Database string `required:"true" default:"jobSchedule"`
 	}
 
 	AuthConfig struct {
@@ -43,7 +43,7 @@ type (
 
 	HTTPConfig struct {
 		Host               string        `envconfig:"http_host"`
-		Port               string        `envconfig:"http_port" default:"8085"`
+		Port               string        `ignored:"true" default:"8085"`
 		ReadTimeout        time.Duration `envconfig:"http_read_timeout" default:"10s"`
 		WriteTimeout       time.Duration `envconfig:"http_write_timeout" default:"10s"`
 		MaxHeaderMegabytes int           `envconfig:"http_max_header_megabytes" default:"1"`
